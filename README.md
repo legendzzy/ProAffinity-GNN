@@ -29,6 +29,11 @@
 - Please prepare the data needed to be trained or tested. The example data files are under the `data` folder.
 - The model trained in this work in provided in the `model` folder.
 
+## Inference
+
+- To easily use ProAffinity-GNN to test on any protein-protein complex, we provide the inference code, see `ProAffinity-GNN_inference`.
+- Run `python ProAffinity-GNN_inference.py -f [your pdbqt input file] -c [interaction chains, e.g., A,B]`
+
 ## Prerequisites
 
 - Python=3.8
