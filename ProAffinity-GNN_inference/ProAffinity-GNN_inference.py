@@ -910,7 +910,9 @@ all_predictions = np.concatenate(all_predictions, axis=0)
 # keep 3 decimal places
 print('pKa:', round(all_predictions[0], 3))
 
-# %%
-# !pip install biopython
+# save to file
+with open('./result_' + pdbfile + '.txt', 'w') as f:
+    f.write(pdbfile + ' pKa: ' + str(round(all_predictions[0], 3)))
+
 
 
