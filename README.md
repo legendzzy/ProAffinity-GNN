@@ -32,6 +32,7 @@
 ## Inference
 
 - To easily use ProAffinity-GNN to test on any protein-protein complex, we provide the inference code, see `/ProAffinity-GNN_inference`.
+- It's an easy-to-use version without the requirement of FASTA sequence information, so the accuracy would be slightly affected.
 - Run `python ProAffinity-GNN_inference.py -f [your pdbqt input file] -c [interaction chains, e.g., AB,C]`
 - Example: Run `cd ./ProAffinity-GNN_inference`, and Run `python ProAffinity-GNN_inference.py -f 1ak4_processed.pdbqt -c A,D`
 - Input file would be PDBQT format, please prepare it from pdb file.
