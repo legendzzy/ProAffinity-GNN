@@ -177,7 +177,7 @@ dropout = 0.5
 model = GraphNetwork(in_channels, hidden_channels, out_channels, edge_dim, num_layers, num_timesteps, dropout, linear_out1, linear_out2).to(device)
 
 # Load the trained parameters
-model.load_state_dict(torch.load('model/model_trained.pkl'))
+model.load_state_dict(torch.load('model/model.pkl'))
 model.eval()  # Set the model to evaluation mode
 
 all_predictions = []
