@@ -47,7 +47,7 @@ atom_pair = ['A_A', 'A_C', 'A_OA', 'A_N', 'A_NA', 'A_SA', 'A_HD',
 bin_number = 10
 type_number = len(atom_pair)
 inter_distance = 15
-y_dict = read_y('/data/a/zhiyuan/dataset/PP/PPIdataindex.txt')
+y_dict = read_y('data/PPIdataindex.txt')
 
 
 for pdb in filenames:
