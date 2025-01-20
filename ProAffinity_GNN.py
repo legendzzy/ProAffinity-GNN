@@ -81,7 +81,7 @@ val_loader_inter = DataLoader(val_set_inter, batch_size=16)
 train_set_intra1 = datalist_intra1[:int(0.8 * data_len2)]
 val_set_intra1 = datalist_intra1[int(0.8 * data_len2):]
 train_loader_intra1 = DataLoader(train_set_intra1, batch_size=16)
-val_loader_intra1 = DataLoader(val_set_intra1, batch_size=1)
+val_loader_intra1 = DataLoader(val_set_intra1, batch_size=16)
 
 train_set_intra2 = datalist_intra2[:int(0.8 * data_len3)]
 val_set_intra2 = datalist_intra2[int(0.8 * data_len3):]
