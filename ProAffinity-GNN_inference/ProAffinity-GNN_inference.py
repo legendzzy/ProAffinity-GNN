@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # %%
 import copy
 import math
@@ -797,6 +798,7 @@ try:
 except Exception as e:
     print(e)
 
+
 data2 = Data(x=x_indi_2, edge_index=edge_index, edge_attr=edge_feature)
 # save_path = '/data/a/zhiyuan/dataset/PP/revision/graph_info/individual_dis_' +  str(intra_distance) + '/' + pdb
 
@@ -844,7 +846,9 @@ graph = data
 graph1 = data1
 graph2 = data2
 graph.edge_attr = graph.edge_attr.float()
-graph1.edge_attr = graph1.edge_attr.float()
+
+
+graph1.edge_attr = [attr.float() for attr in graph1.edge_attr]
 graph2.edge_attr = graph2.edge_attr.float()
 
 datalist_inter = []
@@ -870,7 +874,18 @@ dropout = 0.5
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = GraphNetwork(in_channels, hidden_channels, out_channels, edge_dim, num_layers, num_timesteps, dropout, linear_out1, linear_out2).to(device)
-model.load_state_dict(torch.load('./model.pkl'))
+#model.load_state_dict(torch.load('./model.pkl'))
+
+state_dict = torch.load('./model.pkl')
+
+new_state_dict = {}
+for key, value in state_dict.items():
+    new_key = key.replace("lin_src", "lin").replace("lin_dst", "lin")
+    new_state_dict[new_key] = value
+
+model.load_state_dict(new_state_dict, strict=False)
+
+
 # Assuming model is your GNN model and dataloader is your test dataloader
 model.eval()  # Set the model to evaluation mode
 
@@ -887,11 +902,14 @@ with torch.no_grad():
         batch_inter = batch_inter.to(device)
         batch_intra1 = batch_intra1.to(device)
         batch_intra2 = batch_intra2.to(device)
-
-        # y_true = batch_inter.y
+        if isinstance(batch_intra1.edge_attr, list):
+            batch_intra1.edge_attr = torch.stack(batch_intra1.edge_attr, dim=0).to(device) 
+        if isinstance(batch_intra2.edge_attr, list):
+            batch_intra2.edge_attr = torch.stack(batch_intra2.edge_attr, dim=0).to(device)        # y_true = batch_inter.y
         # y_true = y_true.to(device)
         
         # Get model predictions for the current batch
+        #print(batch_inter, batch_intra1, batch_intra2)
         y_pred = model(batch_inter, batch_intra1, batch_intra2)
         y_pred = torch.squeeze(y_pred)
         
