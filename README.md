@@ -1,5 +1,9 @@
 # ProAffinity-GNN
 
+## Data Access
+Please download the data list from the Support Information in this link
+https://pubs.acs.org/doi/10.1021/acs.jcim.4c01850
+
 ## Data Preparation
 
 ### 1. Prepare PDBQT File
